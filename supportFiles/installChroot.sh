@@ -21,22 +21,18 @@ update-locale LANG=en_US.UTF-8
 echo Install packages
 apt-get install -y --no-install-recommends linux-image-amd64 live-boot systemd-sysv
 apt-get install -y bash-completion cifs-utils curl dbus dosfstools firmware-linux-free gddrescue gdisk iputils-ping isc-dhcp-client less nfs-common ntfs-3g openssh-client open-vm-tools procps vim wimtools wget 
-apt-get install -f -y pzstd e2fsprogs clonezill
+apt-get install -f -y pzstd e2fsprogs
 echo Clean apt post-install
 apt-get clean
 
 echo Enable systemd-networkd as network manager
 systemctl enable systemd-networkd
 
-echo Set resolv.conf to use systemd-resolved
-rm /etc/resolv.conf
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+# Disable systemd-resolved
+systemctl disable systemd-resolved
 
 echo Set root password
 echo "root:toor" | chpasswd
 
 echo Remove machine-id
 rm /etc/machine-id
-
-echo List installed packages
-dpkg --get-selections|tee /packages.txt
