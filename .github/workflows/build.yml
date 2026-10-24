@@ -1,4 +1,4 @@
-name: "Build Debian Live Minimal ISO"
+name: "Build Debian Live ISO"
 
 on:
   schedule:
@@ -24,7 +24,7 @@ jobs:
           echo "DATESTAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV 
 
       - name: "Checking out git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: "Build Image"
         run: |
@@ -36,7 +36,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           automatic_release_tag: "${{ env.DATESTAMP }}"
-          title: "Debian 10 Live Minimal ISO"
+          title: "Debian 12 Live ISO"
           files: |
-            output/debian10-live-minimal-x86_64.iso
+            output/debian12-live-minimal-x86_64.iso
             output/packages.txt
