@@ -30,13 +30,7 @@ jobs:
         run: |
           ./build.sh
 
-      - name: "Publish"
-        uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: actions/upload-artifact@v7
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          automatic_release_tag: "${{ env.DATESTAMP }}"
-          title: "Debian 12 Live ISO"
-          files: |
-            output/debian12-live-minimal-x86_64.iso
-            output/packages.txt
+          path: output/*
+          if-no-files-found: error
