@@ -1,6 +1,11 @@
 #!/bin/bash
 # This shell script is executed inside the chroot
 
+cat > /etc/apt/sources.list <<'EOF'
+deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+EOF
+
 echo Set hostname
 echo "debian-live" > /etc/hostname
 
